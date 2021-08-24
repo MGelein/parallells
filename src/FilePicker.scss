@@ -18,11 +18,16 @@
         flex-wrap: wrap;
     }
 
+    
     &.exit{
         animation: slideOut 0.5s ease-in-out forwards;
     }
-
+    
     & > * {
         margin-bottom: 1.6rem;
+    }
+
+    &__instruction{
+        margin: 0;
     }
 }

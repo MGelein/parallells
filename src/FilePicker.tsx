@@ -38,7 +38,7 @@ function FilePicker() {
 
     return (<div className={`file-picker ${exiting ? 'exit' : ''}`}>
         <h1 className="file-picker__header">File Picker</h1>
-        <span className="file-pciker__instruction">{getInstruction()}</span>
+        <span className="file-picker__instruction">{getInstruction()}</span>
         <div className="file-picker__content">
             {files.map((_, index) => {
                 return <FileUpload key={index} onUpload={(name, file) => addFile(index, name, file)} onRemove={() => removeFile(index)} />
