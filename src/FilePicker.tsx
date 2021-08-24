@@ -1,12 +1,9 @@
 import { useState, useCallback, useEffect, useContext } from 'react'
 import FileUpload from './FileUpload'
 import Button from './Button';
-import DataContext from './DataContext';
+import { DataContext, FileSummary } from './DataContext';
 
 import './FilePicker.scss'
-
-type FileSummary = { file: string, name: string }
-
 
 function FilePicker() {
     const { setMode } = useContext(DataContext);

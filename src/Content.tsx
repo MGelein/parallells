@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import DataContext from './DataContext';
+import { DataContext } from './DataContext';
 import FilePicker from './FilePicker';
 
 import './Content.scss'
