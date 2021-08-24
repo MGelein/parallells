@@ -6,7 +6,7 @@ import { DataContext, FileSummary } from './DataContext';
 import './FilePicker.scss'
 
 function FilePicker() {
-    const { setMode } = useContext(DataContext);
+    const { setMode, setFiles: setContextFiles } = useContext(DataContext);
     const getEmptyFile = useCallback(() => { return { file: '', name: '' }; }, []);
     const [files, setFiles] = useState<FileSummary[]>([getEmptyFile(), getEmptyFile()]);
     const [exiting, setExiting] = useState(false);
@@ -46,6 +46,7 @@ function FilePicker() {
         </div>
         <Button label={loadedCount < 2 ? 'Waiting...' : 'Ready!'} size="large" disabled={loadedCount < 2} onClick={() => {
             setExiting(true);
+            setContextFiles(files.filter(({ name, file }) => (name !== '' && file !== '')));
             setTimeout(() => {
                 setMode('text');
             }, 500);

@@ -8,7 +8,7 @@ import Credits from './Credits';
 
 function Content() {
     const { mode, credits } = useContext(DataContext);
-    console.log(mode);
+
     return (<div className="content">
         {mode === 'filepicker' && <FilePicker />}
         {mode === 'text' && <Texts />}

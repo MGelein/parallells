@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import Button from './Button'
+import ColumnCounter from './ColumnCounter'
 import { DataContext } from './DataContext'
 
 import './Nav.scss'
@@ -9,6 +10,7 @@ function Nav() {
     return (<nav className="nav">
         <h1 className="logo">Para<em>ll</em>e<em>ll</em>s</h1>
         <div className="nav__controls">
+            <ColumnCounter />
             <Button label="How To Cite Us" size="small" type="nav" onClick={() => { setCredits(true) }} />
         </div>
     </nav>)

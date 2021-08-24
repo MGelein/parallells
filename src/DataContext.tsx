@@ -13,6 +13,9 @@ type defaultType = {
 
     credits: boolean,
     setCredits: React.Dispatch<React.SetStateAction<boolean>>
+
+    columns: number,
+    setColumns: React.Dispatch<React.SetStateAction<number>>
 }
 
 const defaultSettings: defaultType = {
@@ -24,6 +27,9 @@ const defaultSettings: defaultType = {
 
     credits: false,
     setCredits: () => { },
+
+    columns: 3,
+    setColumns: () => { },
 }
 
 export const DataContext = createContext(defaultSettings)
@@ -31,15 +37,17 @@ export const DataContext = createContext(defaultSettings)
 function AppContext({ children }: {
     children: React.ReactNode
 }) {
-    const [mode, setMode] = useState<Mode>('filepicker');
-    const [files, setFiles] = useState<FileSummary[]>([]);
-    const [credits, setCredits] = useState(false);
+    const [mode, setMode] = useState<Mode>(defaultSettings.mode);
+    const [files, setFiles] = useState<FileSummary[]>(defaultSettings.files);
+    const [credits, setCredits] = useState(defaultSettings.credits);
+    const [columns, setColumns] = useState(defaultSettings.columns);
 
 
     return (<DataContext.Provider value={{
         mode, setMode,
         files, setFiles,
-        credits, setCredits
+        credits, setCredits,
+        columns, setColumns,
     }}>
         {children}
     </DataContext.Provider>)
