@@ -1,0 +1,15 @@
+.nav{
+    width: 100%;
+    position: fixed;
+    padding: 1.6rem 3.2rem;
+    background: var(--color-background-dark);
+    color: var(--color-font-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0 1.5rem #333;
+
+    .logo{
+        font-size: 3rem;
+    }
+}

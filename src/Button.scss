@@ -1,0 +1,45 @@
+.button{
+    font-size: 1.6rem;
+    border: none;
+    box-shadow: 0 0 0.4rem #ccc;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    user-select: none;
+
+    &:hover{
+        transform: translateY(-0.2rem);
+    }
+
+    &.disabled{
+        pointer-events: none;
+        cursor: default;
+        box-shadow: none;
+
+        &:hover{
+            transform: none;
+        }
+    }
+    
+    &.primary{
+        background: var(--color-background-dark);
+        color: var(--color-font-light);
+    }
+    
+    &.secondary{
+        background: var(--color-font-light);
+        color: var(--color-font-dark);
+        border: 2px solid var(--color-font-dark);
+    }
+
+    &.large{
+        font-size: 2.2rem;
+        padding: 0.8rem 1.6rem;
+        border-radius: 0.8rem;
+    }
+    
+    &.small{
+        padding: 0.4rem 0.8rem;
+        border-radius: 0.4rem;
+    }
+
+}

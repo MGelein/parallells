@@ -1,3 +1,42 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+*, ::before, ::after {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{ 
+  font-size: 1.6rem;
+}
+
+:root{
+  --color-background-dark: #383837;
+  --color-background-light: #eee;
+  --color-font-dark: #414140;
+  --color-font-light: white;
+
+  font-size: 10px;
+  font-family: 'Roboto', sans-serif;
+  color: var(--color-font-primary);
+}
+
+@keyframes slideIn {
+  0%{
+      transform: translateX(-100vw);
+  }
+  
+  100%{
+      transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  0%{
+    transform: translateX(0);
+  }
+
+  100%{
+    transform: translateX(200vw);
+  }
 }

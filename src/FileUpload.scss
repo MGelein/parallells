@@ -1,0 +1,52 @@
+.file-upload{
+    background: transparent;
+    font-size: 1.6rem;
+    border: 2px solid var(--color-background-light);
+    border-radius: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.8rem;
+    margin: 1.6rem 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover{
+        transform: translateY(-0.8rem);
+    }
+
+    &__icon{
+        font-size: 4.8rem;
+        font-weight: 700;
+        color: var(--color-background-light);
+    }
+
+    &__input{
+       display: none; 
+    }
+
+    &__file-remove{
+        cursor: pointer;
+        transition: opacity 0.2s ease-in-out;
+        margin: 0 0.4rem;
+        border: 1px solid var(--color-background-light);
+        padding: 0 0.4rem;
+        border-radius: 0.4rem;
+
+        &:hover{
+            opacity: 0.6;
+        }
+    }
+
+    &--done{
+        background-color: var(--color-background-dark);
+        color: var(--color-font-light);
+        cursor: default;
+        flex-direction: row;
+
+        &:hover{
+            transform: none;
+        }
+    }
+}
