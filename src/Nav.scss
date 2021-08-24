@@ -11,5 +11,17 @@
 
     .logo{
         font-size: 3rem;
+        
+        em {
+            font-style: normal;
+            color: var(--color-accent);
+        }
+    }
+
+    &__controls{
+        position: static;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

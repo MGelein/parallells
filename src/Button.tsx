@@ -10,7 +10,7 @@ function Button({
     label: string,
     size: 'small' | 'large',
     onClick: () => void,
-    type?: 'primary' | 'secondary',
+    type?: 'primary' | 'secondary' | 'nav',
     disabled?: boolean,
 }) {
     const disabledClass = disabled ? 'disabled' : '';

@@ -1,0 +1,76 @@
+.credits{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    &.opening{
+        animation: fadeIn 0.5s ease-in-out forwards;
+
+        .credits__popover{
+            animation: slideIn 0.5s ease-in-out forwards;
+        }
+    }
+
+    &.open{
+        background: rgba(0, 0, 0, 0.6);
+    }
+
+    &.closing{
+        animation: fadeOut 0.5s ease-in-out forwards;
+
+        .credits__popover{
+            animation: slideOut 0.5s ease-in-out forwards;
+        }
+    }
+
+    &__popover{
+        max-width: 64rem;
+        min-height: 36rem;
+        background: white;
+        border-radius: 0.8rem;
+        box-shadow: 0 0 1.5em #333;
+        padding: 2.4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        p{
+            margin-top: 0.8rem;
+        }
+
+        code{
+            display: block;
+            margin-top: 0.8rem;
+            background: var(--color-background-light);
+            padding: 0.4rem;
+        }
+
+        &__button{
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    @keyframes fadeIn{
+        0% {
+            background: transparent;
+        }
+
+        100%{
+            background: rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    @keyframes fadeOut{
+        0%{
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        100%{
+            background: transparent;
+        }
+    }
+}

@@ -20,6 +20,18 @@
         }
     }
     
+    
+    &.large{
+        font-size: 2.2rem;
+        padding: 0.8rem 1.6rem;
+        border-radius: 0.8rem;
+    }
+    
+    &.small{
+        padding: 0.4rem 0.8rem;
+        border-radius: 0.4rem;
+    }
+    
     &.primary{
         background: var(--color-background-dark);
         color: var(--color-font-light);
@@ -31,15 +43,15 @@
         border: 2px solid var(--color-font-dark);
     }
 
-    &.large{
-        font-size: 2.2rem;
-        padding: 0.8rem 1.6rem;
-        border-radius: 0.8rem;
-    }
-    
-    &.small{
-        padding: 0.4rem 0.8rem;
-        border-radius: 0.4rem;
-    }
+    &.nav{
+        width: auto;
+        box-shadow: none;
+        position: static;
+        transition: opacity 0.2s ease-in-out;
 
+        &:hover{
+            transform: none;
+            opacity: 0.5;
+        }
+    }
 }

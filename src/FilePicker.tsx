@@ -37,7 +37,7 @@ function FilePicker() {
     }
 
     return (<div className={`file-picker ${exiting ? 'exit' : ''}`}>
-        <h1 className="file-picker__header">File Picker</h1>
+        <h1 className="file-picker__header">File picker</h1>
         <span className="file-picker__instruction">{getInstruction()}</span>
         <div className="file-picker__content">
             {files.map((_, index) => {
