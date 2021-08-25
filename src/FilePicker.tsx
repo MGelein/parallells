@@ -2,7 +2,6 @@ import { useState, useCallback, useEffect, useContext } from 'react'
 import FileUpload from './FileUpload'
 import Button from './Button';
 import { DataContext, FileSummary } from './DataContext';
-import { getDifferences } from './util/compare';
 
 import './FilePicker.scss'
 
@@ -49,8 +48,6 @@ function FilePicker() {
             setExiting(true);
             const loadedFiles = files.filter(({ name, file }) => (name !== '' && file !== ''))
             setContextFiles(loadedFiles);
-            const texts = loadedFiles.map((file) => file.file);
-            console.log(getDifferences(texts));
             setTimeout(() => {
                 setMode('text');
             }, 500);

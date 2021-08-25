@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState, useContext } from 'react';
 import { DataContext, FileSummary } from './DataContext';
 
 import './TextView.scss';
+import { breakIntoAlternatingParts } from './util/markup';
 
 function TextView({
     file,
@@ -10,19 +11,34 @@ function TextView({
     file: FileSummary,
     index: number,
 }) {
+    const [markupParts, setMarkupParts] = useState<JSX.Element[] | null>(null);
     const [optionsVisible, setOptionsVisible] = useState(false);
-    const { columns, files } = useContext(DataContext);
+    const { columns, files, setColumns, diffs } = useContext(DataContext);
     const [currentFile, setCurrentFile] = useState<FileSummary>(file);
     const [filenames, setFilenames] = useState<string[]>(files.map(({ name }) => name));
-    const visibleClass = index < columns ? '' : 'hidden';
+    const visibleClass = index < columns.length ? '' : 'hidden';
+
+    useEffect(() => {
+        const myDiff = diffs[index];
+        const parts = breakIntoAlternatingParts(myDiff.text, myDiff.unmatches);
+        const newMarkupParts = parts.map((part, index) => {
+            return index % 2 === 0 ?
+                <span key={index} className="text normal">{part}</span> :
+                <span key={index} className="text diff">{part}</span>
+        });
+        setMarkupParts(newMarkupParts);
+    }, [diffs, index])
+
     const loadFile = useCallback((name: string) => {
-        const file = files.reduce((found, value) => {
-            if (value.name === name) return value;
-            return found;
-        })
+        const file = files.reduce((found, value) => value.name === name ? value : found);
         setCurrentFile(file);
         setOptionsVisible(false);
-    }, [setCurrentFile, files]);
+        setColumns(prevColumns => {
+            const newColumns = [...prevColumns];
+            newColumns[index] = file;
+            return newColumns;
+        });
+    }, [setCurrentFile, files, setColumns, index]);
 
     useEffect(() => setFilenames(files.map(({ name }) => name)), [files, setFilenames]);
 
@@ -39,7 +55,7 @@ function TextView({
             </div>
         </div>
         <div className="text-view__contents">
-            {currentFile.file}
+            {markupParts ?? currentFile.file}
         </div>
     </div>)
 }

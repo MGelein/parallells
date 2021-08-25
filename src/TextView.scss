@@ -11,6 +11,12 @@
     min-width: 0;
     margin-bottom: 3.2rem;
 
+    & .text{
+        &.diff{
+            background: var(--color-accent);
+        }
+    }
+
     &.hidden{
         display: none;
     }

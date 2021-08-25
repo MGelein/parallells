@@ -11,7 +11,7 @@ type Range = { from: TextIndex, to: TextIndex };
 type IdRange = { id: TextId, range: Range };
 type TextMatches = Map<TextId, Range[]>
 type CoverageMap = Map<TextId, Boolean[]>;
-type UnMatch = { from: number, to: number, urn: string, text: string };
+export type UnMatch = { from: number, to: number, urn: string, text: string };
 
 export function getDifferences(texts: string[]) {
     const preparedTexts = prepareTexts(texts);
