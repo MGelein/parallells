@@ -22,6 +22,16 @@ body{
   color: var(--color-font-primary);
 }
 
+@keyframes fallIn {
+  0%{
+      transform: translateY(-100vh);
+  }
+  
+  100%{
+      transform: translateY(0);
+  }
+}
+
 @keyframes slideIn {
   0%{
       transform: translateX(-100vw);

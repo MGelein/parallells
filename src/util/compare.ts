@@ -1,11 +1,9 @@
-const K = 10;
-
 type Text = { id: TextId, text: string };
 type TextId = number;
 type TextIndex = number;
 type MergedDict = Map<string, Map<TextId, TextIndex[]>>;
 type Dict = Map<string, TextIndex[]>;
-type Match = { main: IdRange, other: IdRange }
+export type Match = { main: IdRange, other: IdRange }
 type Occurence = { id: TextId, index: TextIndex };
 type Range = { from: TextIndex, to: TextIndex };
 type IdRange = { id: TextId, range: Range };
@@ -13,15 +11,15 @@ type TextMatches = Map<TextId, Range[]>
 type CoverageMap = Map<TextId, Boolean[]>;
 export type UnMatch = { from: number, to: number, urn: string, text: string };
 
-export function getDifferences(texts: string[]) {
+export function getDifferences(texts: string[], K: number = 10) {
     const preparedTexts = prepareTexts(texts);
-    const dicts = buildDicts(preparedTexts);
+    const dicts = buildDicts(preparedTexts, K);
     const mergedDict = mergeDicts(dicts[0], dicts);
     const matches = expandMatchingNGrams(mergedDict, preparedTexts);
     const matchesByText = calculateMatchesByText(matches);
     const unmatchedArray = calculateUnmatchedArrays(matchesByText, preparedTexts);
-    const unmatchedTexts = calculateUnmatchedTexts(unmatchedArray, preparedTexts, texts)
-    return unmatchedTexts;
+    const unmatchedTexts = calculateUnmatchedTexts(unmatchedArray, preparedTexts, texts);
+    return { unmatchedTexts, matches };
 }
 
 function prepareTexts(texts: string[]) {
@@ -37,15 +35,19 @@ function prepareTexts(texts: string[]) {
 }
 
 
-const buildDicts = function (texts: Text[]) {
-    return texts.map(text => buildDict(text))
+const buildDicts = function (texts: Text[], K: number) {
+    return texts.map(text => buildDict(text, K))
 }
 
-const buildDict = function (textObject: Text) {
+const substr = function (s: string, from: number, length: number) {
+    return s.substring(Math.max(0, from), Math.min(s.length, from + length));
+}
+
+const buildDict = function (textObject: Text, K: number) {
     const dict = new Map<string, number[]>()
     const text = textObject.text
-    for (let i = 0; i < text.length - K; i++) {
-        const ngram = text.substr(i, K)
+    for (let i = -K; i < text.length; i++) {
+        const ngram = substr(text, i, K);
         if (dict.has(ngram)) {
             dict.get(ngram)?.push(i)
         } else {
@@ -119,7 +121,7 @@ const expandMatchingNGram = function (ngramDict: Map<TextId, TextIndex[]>, texts
 }
 
 const expandMatchingNGramPair = function (main: Occurence, other: Occurence, texts: Text[], matches: Match[]) {
-    if (containedInExistingMatch(main, other, matches)) return
+    if (containedInExistingMatch(main, other, matches, main.id, other.id)) return
 
     const mainText = texts[main.id].text
     const otherText = texts[other.id].text
@@ -158,11 +160,11 @@ const expandMatchingNGramPair = function (main: Occurence, other: Occurence, tex
     return match
 }
 
-const containedInExistingMatch = function (main: Occurence, other: Occurence, matches: Match[]) {
+const containedInExistingMatch = function (main: Occurence, other: Occurence, matches: Match[], mainId: number, otherId: number) {
     for (let match of matches) {
         const mainRange = match.main.range;
         const otherRange = match.other.range;
-        if (mainRange && otherRange) {
+        if (mainRange && otherRange && mainId === match.main.id && match.other.id === otherId) {
             const mainContained = mainRange.from < main.index && mainRange.to > main.index
             const otherContained = otherRange.from < other.index && otherRange.to > other.index
             if (mainContained && otherContained) return true
@@ -251,7 +253,7 @@ const createUnmatch = function (start: TextIndex, end: TextIndex | undefined, te
     const unmatch: UnMatch = {
         urn: `${startChar}[${startCount}]-${endChar}[${endCount}]`,
         from: urnToIndex(startChar, startCount, origText),
-        to: urnToIndex(endChar, endCount, origText) + 1,
+        to: urnToIndex(endChar, endCount, origText),
         text: '',
     }
     unmatch.text = origText.substring(unmatch.from, unmatch.to)

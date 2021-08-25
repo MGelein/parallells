@@ -14,6 +14,12 @@
     & .text{
         &.diff{
             background: var(--color-accent);
+            cursor: pointer;
+            transition: opacity 0.2s ease-in-out;
+
+            &:hover{
+                opacity: 0.6;
+            }
         }
     }
 
@@ -23,6 +29,18 @@
 
     &__contents{
         margin-top: 1.6rem;
+    }
+
+    &__banner{
+        margin: -1.6rem -1.6rem 0.8rem -1.6rem;
+        padding: 0.8rem 1.6rem;
+        background: var(--color-accent);
+        border-radius: 0.8rem 0.8rem 0 0;
+        color: var(--color-font-light);
+
+        .main &{
+            background: var(--color-background-dark);
+        }
     }
 
     &__header{
