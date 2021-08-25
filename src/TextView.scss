@@ -2,6 +2,7 @@
     background: white;
     flex-grow: 1;
     flex-shrink: 1;
+    flex-basis: 0;
     padding: 1.6rem;
     margin: 0.8rem;
     border-radius: 0.8rem;
@@ -33,7 +34,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 27rem;
+            max-width: calc(max(80%, 27rem));
         }
 
         &-label{

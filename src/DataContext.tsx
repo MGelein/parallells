@@ -28,7 +28,7 @@ const defaultSettings: defaultType = {
     credits: false,
     setCredits: () => { },
 
-    columns: 3,
+    columns: 0,
     setColumns: () => { },
 }
 
