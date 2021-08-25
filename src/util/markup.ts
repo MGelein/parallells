@@ -10,3 +10,12 @@ export function breakIntoAlternatingParts(text: string, unmatches: UnMatch[], ma
     parts.push(text.substr(lastSpan?.[1] || 0));
     return parts;
 }
+
+export function parseHTML(html: string) {
+    const sketchpad = document.querySelector('#sketchpad');
+    if (!sketchpad) return [''];
+    sketchpad.innerHTML = html;
+
+    const passages = Array.from(sketchpad.querySelectorAll('.passage'));
+    return passages.map(passage => passage.outerHTML);
+}

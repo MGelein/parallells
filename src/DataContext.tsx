@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from "react"
-import { getDifferences, UnMatch, Match } from "./util/compare";
+import { UnMatch, Match } from "./util/compare";
 
-export type FileSummary = { file: string, name: string, extension: string }
+export type FileSummary = { passages: string[], name: string }
 
 type Mode = 'filepicker' | 'text';
 type Diff = { text: string, unmatches: UnMatch[], matches: Match[] };
@@ -64,15 +64,6 @@ function AppContext({ children }: {
             return prevColumns;
         })
     }, [files])
-
-    useEffect(() => {
-        // const texts = columns.map(column => column.file);
-        // const differences = getDifferences(texts, K);
-        // const { unmatchedTexts, matches } = differences;
-        // setDiffs(texts.map((text, index) => {
-        //     return { text, unmatches: unmatchedTexts[index], matches }
-        // }));
-    }, [columns, K]);
 
     return (<DataContext.Provider value={{
         mode, setMode,

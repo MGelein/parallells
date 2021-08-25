@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState, useContext } from 'react';
 import { DataContext, FileSummary } from './DataContext';
-import { breakIntoAlternatingParts } from './util/markup';
 
 import './TextView.scss';
 
@@ -11,11 +10,11 @@ function TextView({
     file: FileSummary,
     index: number,
 }) {
-    const [markupParts, setMarkupParts] = useState<JSX.Element[] | null>(null);
     const [optionsVisible, setOptionsVisible] = useState(false);
-    const { columns, files, setColumns, diffs } = useContext(DataContext);
+    const { columns, files, setColumns } = useContext(DataContext);
     const [currentFile, setCurrentFile] = useState<FileSummary>(file);
     const [filenames, setFilenames] = useState<string[]>(files.map(({ name }) => name));
+    const [passages] = useState(file.passages);
     const isVisibleColumn = index < columns.length;
     const visibleClass = isVisibleColumn ? '' : 'hidden';
 
@@ -25,18 +24,6 @@ function TextView({
             return columns.length === 2 ? 'Showing difference to other' : "Showing unique occurences in main";
         }
     }, [index, columns.length])
-
-    useEffect(() => {
-        if (!isVisibleColumn || diffs.length <= index) return;
-        const myDiff = diffs[index];
-        const parts = breakIntoAlternatingParts(myDiff.text, myDiff.unmatches, myDiff.matches);
-        const newMarkupParts = parts.map((part, index) => {
-            return index % 2 === 0 ?
-                <span key={index} className="text normal">{part}</span> :
-                <span key={index} className="text diff">{part}</span>
-        });
-        setMarkupParts(newMarkupParts);
-    }, [diffs, index, isVisibleColumn])
 
     const loadFile = useCallback((name: string) => {
         const file = files.reduce((found, value) => value.name === name ? value : found);
@@ -64,8 +51,11 @@ function TextView({
                 })}
             </div>
         </div>
-        {currentFile.extension === '.html' && <div className="text-view__contents" dangerouslySetInnerHTML={{ __html: currentFile.file }}></div>}
-        {currentFile.extension === '.txt' && <div className="text-view__contents">{markupParts ?? currentFile.file}</div>}
+        <div className="text-view__contents">
+            {passages.map((passage, index) => {
+                return <div className="text-view__contents__passage" key={index} dangerouslySetInnerHTML={{ __html: passage }}></div>
+            })}
+        </div>
     </div>)
 }
 

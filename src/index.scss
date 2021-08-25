@@ -22,6 +22,10 @@ body{
   color: var(--color-font-primary);
 }
 
+#id{
+  display: none;
+}
+
 @keyframes fallIn {
   0%{
       transform: translateY(-100vh);

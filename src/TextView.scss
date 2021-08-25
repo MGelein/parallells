@@ -28,10 +28,12 @@
     }
 
     &__contents{
-        margin-top: 1.6rem;
-        
         pre {
             white-space: normal;
+        }
+
+        &__passage{
+            margin-top: 3.2rem;
         }
     }
 

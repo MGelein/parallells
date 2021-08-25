@@ -1,4 +1,6 @@
 import { useState, useCallback } from 'react';
+import { parseHTML } from './util/markup';
+
 import './FileUpload.scss'
 
 
@@ -6,7 +8,7 @@ function FileUpload({
     onUpload,
     onRemove
 }: {
-    onUpload: (name: string, extension: string, file: string) => void;
+    onUpload: (name: string, passages: string[]) => void;
     onRemove: (name: string) => void;
 }) {
     const [fileName, setFileName] = useState('');
@@ -21,8 +23,11 @@ function FileUpload({
         fileReader.onload = (fileEvent) => {
             const fileData = fileEvent.target?.result;
 
+            const passages = extension === '.html' ? parseHTML(fileData as string) : [fileData as string];
+
+
             if (fileData) {
-                onUpload(nameOfFile, extension, fileData as string);
+                onUpload(nameOfFile, passages);
                 setUploadDone(true);
             }
         }
