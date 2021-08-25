@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, useContext } from 'react'
 import FileUpload from './FileUpload'
 import Button from './Button';
 import { DataContext, FileSummary } from './DataContext';
-import { getDifferences } from './compare';
+import { getDifferences } from './util/compare';
 
 import './FilePicker.scss'
 
@@ -47,9 +47,10 @@ function FilePicker() {
         </div>
         <Button label={loadedCount < 2 ? 'Waiting...' : 'Ready!'} size="large" disabled={loadedCount < 2} onClick={() => {
             setExiting(true);
-            setContextFiles(files.filter(({ name, file }) => (name !== '' && file !== '')));
-            const texts = files.map((file) => file.file);
-            console.log(getDifferences(...texts));
+            const loadedFiles = files.filter(({ name, file }) => (name !== '' && file !== ''))
+            setContextFiles(loadedFiles);
+            const texts = loadedFiles.map((file) => file.file);
+            console.log(getDifferences(texts));
             setTimeout(() => {
                 setMode('text');
             }, 500);
