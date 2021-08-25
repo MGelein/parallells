@@ -6,7 +6,7 @@ function FileUpload({
     onUpload,
     onRemove
 }: {
-    onUpload: (name: string, file: string) => void;
+    onUpload: (name: string, extension: string, file: string) => void;
     onRemove: (name: string) => void;
 }) {
     const [fileName, setFileName] = useState('');
@@ -16,15 +16,17 @@ function FileUpload({
         const fileReader = new FileReader();
         const file = target.files?.[0]
         const nameOfFile = file?.name ?? '';
+        const extension = nameOfFile.substr(nameOfFile.lastIndexOf('.')).toLowerCase();
 
         fileReader.onload = (fileEvent) => {
             const fileData = fileEvent.target?.result;
+
             if (fileData) {
-                onUpload(nameOfFile, fileData as string);
+                onUpload(nameOfFile, extension, fileData as string);
                 setUploadDone(true);
             }
         }
-        if (file) {
+        if (file && ['.txt', '.html'].includes(extension)) {
             fileReader.readAsText(file);
             setFileName(nameOfFile);
         }
@@ -43,7 +45,7 @@ function FileUpload({
         {!uploadDone && (<>
             <span className="file-upload__instruction">Upload file</span>
             <span className="file-upload__icon">+</span>
-            <input className="file-upload__input" type='file' onChange={(e) => readFile(e.target)} />
+            <input className="file-upload__input" type='file' accept='.txt, .html' onChange={(e) => readFile(e.target)} />
         </>)}
     </label>)
 }

@@ -64,9 +64,8 @@ function TextView({
                 })}
             </div>
         </div>
-        <div className="text-view__contents">
-            {markupParts ?? currentFile.file}
-        </div>
+        {currentFile.extension === '.html' && <div className="text-view__contents" dangerouslySetInnerHTML={{ __html: currentFile.file }}></div>}
+        {currentFile.extension === '.txt' && <div className="text-view__contents">{markupParts ?? currentFile.file}</div>}
     </div>)
 }
 

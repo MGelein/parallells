@@ -7,7 +7,7 @@ import './FilePicker.scss'
 
 function FilePicker() {
     const { setMode, setFiles: setContextFiles } = useContext(DataContext);
-    const getEmptyFile = useCallback(() => { return { file: '', name: '' }; }, []);
+    const getEmptyFile = useCallback(() => { return { file: '', name: '', extension: '' }; }, []);
     const [files, setFiles] = useState<FileSummary[]>([getEmptyFile(), getEmptyFile()]);
     const [exiting, setExiting] = useState(false);
     const [loadedCount, setLoadedCount] = useState(0);
@@ -29,9 +29,9 @@ function FilePicker() {
         setFiles(newFiles);
     }
 
-    const addFile = (index: number, name: string, file: string) => {
+    const addFile = (index: number, name: string, extension: string, file: string) => {
         const newFiles = [...files];
-        newFiles[index] = { name, file };
+        newFiles[index] = { name, file, extension };
         const emptyAvailable = newFiles.some(({ file, name }) => file === '' && name === '');
         setFiles(emptyAvailable ? newFiles : [...newFiles, getEmptyFile()]);
     }
@@ -41,7 +41,7 @@ function FilePicker() {
         <span className="file-picker__instruction">{getInstruction()}</span>
         <div className="file-picker__content">
             {files.map((_, index) => {
-                return <FileUpload key={index} onUpload={(name, file) => addFile(index, name, file)} onRemove={() => removeFile(index)} />
+                return <FileUpload key={index} onUpload={(name, extension, file) => addFile(index, name, extension, file)} onRemove={() => removeFile(index)} />
             })}
         </div>
         <Button label={loadedCount < 2 ? 'Waiting...' : 'Ready!'} size="large" disabled={loadedCount < 2} onClick={() => {
