@@ -21,7 +21,7 @@ function Texts() {
             })}
         </div>
         {getMostPassages().map((_, index) => {
-            return <TextRow index={index} />
+            return <TextRow key={index} index={index} />
         })};
     </div>);
 }

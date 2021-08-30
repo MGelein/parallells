@@ -1,6 +1,6 @@
-import { UnMatch, Match } from "./compare";
+import { UnMatch } from "./compare";
 
-export function breakIntoAlternatingParts(text: string, unmatches: UnMatch[], matches: Match[]) {
+export function breakIntoAlternatingParts(text: string, unmatches: UnMatch[]) {
     const indeces: number[] = [];
     unmatches.forEach((unmatch) => indeces.push(unmatch.from, unmatch.to));
     const spans: number[][] = [];
