@@ -13,6 +13,11 @@
         box-shadow: 0 0 0.8rem #ccc;
         white-space: pre-line;
         min-width: 0;
+        line-height: 1.5;
+    }
+
+    &.hovered{
+        background: black;
     }
     
 
@@ -27,5 +32,43 @@
             }
         }
     }
-    
+
+    &:hover &__comparison-button{
+        transform: translate(-0.8rem);
+
+        button{
+            cursor: pointer;
+            pointer-events: all;
+        }
+    }
+
+
+    &__comparison-button{
+        width: 0;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        transform: translateX(10rem);
+        transition: transform 0.2s ease-in-out;
+        z-index: -1;
+        
+        button {
+            transform: rotate(-90deg) translateX(-50%);
+            text-transform: uppercase;
+            font-weight: bold;
+            color: var(--color-font-light);
+            background: var(--color-accent);
+            border: none;
+            padding: 0.8rem 1.6rem;
+            cursor: pointer;
+            pointer-events: none;
+            border-radius: 0.8rem 0.8rem 0 0;
+            transition: opacity 0.2s ease-in-out;
+            letter-spacing: 1.1;
+
+            &:hover{
+                opacity: 0.8;
+            }
+        }
+    }
 }

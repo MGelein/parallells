@@ -1,10 +1,8 @@
 import React, { createContext, useState, useEffect } from "react"
-import { UnMatch, Match } from "./util/compare";
 
 export type FileSummary = { passages: string[], name: string }
 
 type Mode = 'filepicker' | 'text';
-type Diff = { text: string, unmatches: UnMatch[], matches: Match[] };
 
 type defaultType = {
     mode: Mode,
@@ -18,9 +16,6 @@ type defaultType = {
 
     columns: FileSummary[],
     setColumns: React.Dispatch<React.SetStateAction<FileSummary[]>>
-
-    diffs: Diff[],
-    setDiffs: React.Dispatch<React.SetStateAction<Diff[]>>,
 
     K: number,
     setK: React.Dispatch<React.SetStateAction<number>>,
@@ -39,9 +34,6 @@ const defaultSettings: defaultType = {
     columns: [],
     setColumns: () => { },
 
-    diffs: [],
-    setDiffs: () => { },
-
     K: 10,
     setK: () => { },
 }
@@ -55,7 +47,6 @@ function AppContext({ children }: {
     const [files, setFiles] = useState<FileSummary[]>(defaultSettings.files);
     const [credits, setCredits] = useState(defaultSettings.credits);
     const [columns, setColumns] = useState(defaultSettings.columns);
-    const [diffs, setDiffs] = useState(defaultSettings.diffs);
     const [K, setK] = useState(defaultSettings.K);
 
     useEffect(() => {
@@ -70,7 +61,6 @@ function AppContext({ children }: {
         files, setFiles,
         credits, setCredits,
         columns, setColumns,
-        diffs, setDiffs,
         K, setK,
     }}>
         {children}
