@@ -11,6 +11,12 @@ export function breakIntoAlternatingParts(text: string, unmatches: UnMatch[]) {
     return parts;
 }
 
+export function partsToHTML(parts: string[]) {
+    return parts.map((part, index) => {
+        return `<span class="text ${index % 2 === 0 ? 'normal' : 'diff'}">${part}</span>`
+    }).join("");
+}
+
 export function parseHTML(html: string) {
     const sketchpad = document.querySelector('#sketchpad');
     if (!sketchpad) return [''];
