@@ -1,5 +1,6 @@
 {
   "name": "parallells",
+  "homepage": "http://interwing.com/parallells",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
