@@ -18,25 +18,32 @@ function TextRow({
 
     useEffect(() => {
         if (compared) {
-            const { unmatchedTexts: unmatches } = getDifferences(passages(), K);
+            const rowElement = document.querySelector(`#row-${index}`);
+            if (!rowElement) return;
+            const rowPassages = Array.from(rowElement.querySelectorAll('.text-row__passage'));
+            const passageTexts = rowPassages.map(rowPassage => rowPassage.textContent ?? '');
+            const { unmatchedTexts: unmatches } = getDifferences(passageTexts, K);
             unmatches.forEach((textUnmatches, index) => {
-                const text = passages()[index];
-                const parts = breakIntoAlternatingParts(text, textUnmatches);
+                const parts = breakIntoAlternatingParts(passageTexts[index], textUnmatches);
                 console.log(parts);
             });
 
         }
-    }, [compared, passages, K]);
+    }, [compared, passages, K, index]);
 
-    return (<div className={`text-row ${compared ? 'compared' : ''}`}>
+    return (<div id={`row-${index}`} className={`text-row ${compared ? 'compared' : ''}`}>
         <div className="text-row__comparison-button">
             <button onClick={() => setCompared((prevCompared) => !prevCompared)}>
                 <span>{compared ? 'Remove' : 'Compare'}</span>
                 <span className="icon">{compared ? 'x' : '+'}</span>
             </button>
         </div>
-        {passages().map((passage, index) => {
-            return <div key={index} className="text-row__passage" dangerouslySetInnerHTML={{ __html: passage }}></div>
+        {passages().map((passage, passageIndex) => {
+            return <div
+                key={passageIndex}
+                className="text-row__passage"
+                dangerouslySetInnerHTML={{ __html: passage }}>
+            </div>
         })}
     </div>);
 }

@@ -28,16 +28,6 @@
         }
         
         box-shadow: inset 0 0 0 1.6rem var(--color-background-light), inset 0 0 0 1.8rem var(--color-accent);
-        // &::after{
-        //     content: '';
-        //     position: absolute;
-        //     top: 1.6rem;
-        //     left: 1.6rem;
-        //     right: 1.6rem;
-        //     height: 0.2rem;
-        //     background: var(--color-accent);
-        //     z-index: -1;
-        // }
     }    
 
     & .text{
