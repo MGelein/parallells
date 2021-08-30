@@ -2,11 +2,15 @@
     padding-top: 6.4rem;
     max-width: calc(max(calc(100% - 20rem), 100rem));
     min-width: calc(100% - 20rem);
-    min-height: 100vh;
     display: flex;
+    flex-direction: column;
     animation: slideIn 0.5s ease-in-out forwards;
 
     &.exit{
         animation: slideOut 0.5s ease-in-out forwards;
+    }
+
+    &__controls{
+        display: flex;
     }
 }

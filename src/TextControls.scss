@@ -9,32 +9,9 @@
     box-shadow: 0 0 0.8rem #ccc;
     white-space: pre-line;
     min-width: 0;
-    margin-bottom: 3.2rem;
-
-    & .text{
-        &.diff{
-            background: var(--color-accent);
-            cursor: pointer;
-            transition: opacity 0.2s ease-in-out;
-
-            &:hover{
-                opacity: 0.6;
-            }
-        }
-    }
 
     &.hidden{
         display: none;
-    }
-
-    &__contents{
-        pre {
-            white-space: normal;
-        }
-
-        &__passage{
-            margin-top: 3.2rem;
-        }
     }
 
     &__banner{

@@ -1,0 +1,31 @@
+.text-row{
+    display: flex;
+    
+    &__passage{
+        background: var(--color-font-light);
+        padding: 1rem;
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 0;
+        padding: 1.6rem;
+        margin: 0.8rem;
+        border-radius: 0.8rem;
+        box-shadow: 0 0 0.8rem #ccc;
+        white-space: pre-line;
+        min-width: 0;
+    }
+    
+
+    & .text{
+        &.diff{
+            background: var(--color-accent);
+            cursor: pointer;
+            transition: opacity 0.2s ease-in-out;
+
+            &:hover{
+                opacity: 0.6;
+            }
+        }
+    }
+    
+}

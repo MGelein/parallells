@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState, useContext } from 'react';
 import { DataContext, FileSummary } from './DataContext';
 
-import './TextView.scss';
+import './TextControls.scss';
 
-function TextView({
+function TextControls({
     file,
     index,
 }: {
@@ -14,7 +14,6 @@ function TextView({
     const { columns, files, setColumns } = useContext(DataContext);
     const [currentFile, setCurrentFile] = useState<FileSummary>(file);
     const [filenames, setFilenames] = useState<string[]>(files.map(({ name }) => name));
-    const [passages] = useState(file.passages);
     const isVisibleColumn = index < columns.length;
     const visibleClass = isVisibleColumn ? '' : 'hidden';
 
@@ -51,12 +50,7 @@ function TextView({
                 })}
             </div>
         </div>
-        <div className="text-view__contents">
-            {passages.map((passage, index) => {
-                return <div className="text-view__contents__passage" key={index} dangerouslySetInnerHTML={{ __html: passage }}></div>
-            })}
-        </div>
     </div>)
 }
 
-export default TextView;
+export default TextControls;
