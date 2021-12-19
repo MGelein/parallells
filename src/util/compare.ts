@@ -11,8 +11,8 @@ type TextMatches = Map<TextId, Range[]>
 type CoverageMap = Map<TextId, Boolean[]>;
 export type UnMatch = { from: number, to: number, urn: string, text: string };
 
-export function getDifferences(texts: string[], K: number = 10) {
-    const preparedTexts = prepareTexts(texts);
+export function getDifferences(texts: string[], K: number = 10, ignorePunctuation: boolean) {
+    const preparedTexts = prepareTexts(texts, ignorePunctuation);
     const dicts = buildDicts(preparedTexts, K);
     const mergedDict = mergeDicts(dicts[0], dicts);
     const matches = expandMatchingNGrams(mergedDict, preparedTexts);
@@ -22,16 +22,25 @@ export function getDifferences(texts: string[], K: number = 10) {
     return { unmatchedTexts, matches };
 }
 
-function prepareTexts(texts: string[]) {
+function prepareTexts(texts: string[], ignorePunctuation: boolean) {
     const preparedTexts: Text[] = []
     texts.forEach((text, id) => {
-        /*eslint no-useless-escape: "off"*/
+        const noWhiteSpace = removeWhiteSpace(text);
+        const content = ignorePunctuation ? removePunctuation(noWhiteSpace) : noWhiteSpace;
         preparedTexts.push({
-            'id': id,
-            'text': texts[id].trim().replace(/[\s\.、⋯《》」「』『,。，:;!"'“‘’”\?】—]/g, '')
+            id,
+            'text': content
         });
     });
     return preparedTexts
+}
+
+const removeWhiteSpace = (text: string) => {
+    return text.replace(/\s/g, '');
+}
+
+const removePunctuation = (text: string) => {
+    return text.replace(/[.、⋯《》」「』『,。，:;!"'“‘’”?】—]/g, '');
 }
 
 

@@ -12,7 +12,7 @@ function TextRow({
 }: {
     index: number,
 }) {
-    const { columns, K } = useContext(DataContext);
+    const { columns, K, ignorePunctuation } = useContext(DataContext);
     const passages = useMemo(() => columns.map(column => column.passages[index] ?? ''), [columns, index]);
     const [compared, setCompared] = useState(false);
     const [contents, setContents] = useState<string[] | null>(null);
@@ -24,7 +24,7 @@ function TextRow({
         const passageTexts = rowPassages.map(rowPassage => rowPassage.textContent ?? '');
 
         if (compared) {
-            const { unmatchedTexts: unmatches } = getDifferences(passageTexts, K);
+            const { unmatchedTexts: unmatches } = getDifferences(passageTexts, K, ignorePunctuation);
             const htmlSections: string[] = [];
             unmatches.forEach((textUnmatches, index) => {
                 const parts = breakIntoAlternatingParts(passageTexts[index], textUnmatches);
@@ -34,7 +34,7 @@ function TextRow({
         } else {
             setContents(passageTexts);
         }
-    }, [compared, passages, K, index, columns]);
+    }, [compared, passages, K, index, columns, ignorePunctuation]);
 
     useEffect(() => {
         setContents(null);

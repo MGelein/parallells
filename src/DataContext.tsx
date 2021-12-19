@@ -17,6 +17,9 @@ type defaultType = {
     columns: FileSummary[],
     setColumns: React.Dispatch<React.SetStateAction<FileSummary[]>>
 
+    ignorePunctuation: boolean,
+    setIgnorePunctuation: React.Dispatch<React.SetStateAction<boolean>>,
+
     K: number,
     setK: React.Dispatch<React.SetStateAction<number>>,
 }
@@ -32,6 +35,10 @@ const defaultSettings: defaultType = {
     setCredits: () => { },
 
     columns: [],
+
+    ignorePunctuation: true,
+    setIgnorePunctuation: () => { },
+
     setColumns: () => { },
 
     K: 10,
@@ -48,6 +55,7 @@ function AppContext({ children }: {
     const [credits, setCredits] = useState(defaultSettings.credits);
     const [columns, setColumns] = useState(defaultSettings.columns);
     const [K, setK] = useState(defaultSettings.K);
+    const [ignorePunctuation, setIgnorePunctuation] = useState(true);
 
     useEffect(() => {
         setColumns((prevColumns) => {
@@ -61,6 +69,7 @@ function AppContext({ children }: {
         files, setFiles,
         credits, setCredits,
         columns, setColumns,
+        ignorePunctuation, setIgnorePunctuation,
         K, setK,
     }}>
         {children}

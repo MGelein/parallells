@@ -5,6 +5,7 @@ import KSize from './KSize'
 import { DataContext } from './DataContext'
 
 import './Nav.scss'
+import Punctuation from './Punctuation'
 
 function Nav() {
     const { setCredits, mode, setMode } = useContext(DataContext)
@@ -12,7 +13,7 @@ function Nav() {
         <h1 className="logo">Para<em>ll</em>e<em>ll</em>s</h1>
         <div className="nav__controls">
 
-            {mode === 'text' && <><KSize /><ColumnCounter /></>}
+            {mode === 'text' && <><KSize /><ColumnCounter /><Punctuation /></>}
             {mode === 'text' && <Button label="Files" size="small" type="nav" onClick={() => setMode('filepicker')} />}
             <Button label="How To Cite Us" size="small" type="nav" onClick={() => { setCredits(true) }} />
         </div>
