@@ -1,18 +1,21 @@
 import { useState, useCallback } from 'react';
 import { parseHTML } from './util/markup';
+import { FileSummary } from './DataContext';
 
 import './FileUpload.scss'
 
 
 function FileUpload({
     onUpload,
-    onRemove
+    onRemove,
+    file
 }: {
+    file: FileSummary
     onUpload: (name: string, passages: string[]) => void;
     onRemove: (name: string) => void;
 }) {
-    const [fileName, setFileName] = useState('');
-    const [uploadDone, setUploadDone] = useState(false);
+    const [fileName, setFileName] = useState(file.name);
+    const [uploadDone, setUploadDone] = useState(!!file.name);
 
     const readFile = useCallback((target: HTMLInputElement) => {
         const fileReader = new FileReader();

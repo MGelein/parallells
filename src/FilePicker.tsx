@@ -3,12 +3,13 @@ import FileUpload from './FileUpload'
 import Button from './Button';
 import { DataContext, FileSummary } from './DataContext';
 
-import './FilePicker.scss'
+import './FilePicker.scss';
+
+const EMPTY_FILE = { passages: [], name: '' };
 
 function FilePicker() {
-    const { setMode, setFiles: setContextFiles } = useContext(DataContext);
-    const getEmptyFile = useCallback(() => { return { passages: [], name: '' }; }, []);
-    const [files, setFiles] = useState<FileSummary[]>([getEmptyFile(), getEmptyFile()]);
+    const { setMode, setFiles: setContextFiles, files: loadedFiles } = useContext(DataContext);
+    const [files, setFiles] = useState<FileSummary[]>([...loadedFiles, EMPTY_FILE]);
     const [exiting, setExiting] = useState(false);
     const [loadedCount, setLoadedCount] = useState(0);
     const getInstruction = useCallback(() => {
@@ -25,15 +26,15 @@ function FilePicker() {
 
     const removeFile = (index: number) => {
         const newFiles = [...files];
-        newFiles[index] = getEmptyFile();
+        newFiles[index] = EMPTY_FILE;
         setFiles(newFiles);
     }
 
     const addFile = (index: number, name: string, passages: string[]) => {
         const newFiles = [...files];
         newFiles[index] = { name, passages };
-        const emptyAvailable = newFiles.some(({ passages, name }) => passages.length > 0 && name === '');
-        setFiles(emptyAvailable ? newFiles : [...newFiles, getEmptyFile()]);
+        const emptyAvailable = newFiles.some(({ passages, name }) => passages.length === 0 && name === '');
+        setFiles(emptyAvailable ? newFiles : [...newFiles, EMPTY_FILE]);
     }
 
     return (<div className={`file-picker ${exiting ? 'exit' : ''}`}>
@@ -44,17 +45,20 @@ function FilePicker() {
         </span>
         <span className="file-picker__instruction">{getInstruction()}</span>
         <div className="file-picker__content">
-            {files.map((_, index) => {
-                return <FileUpload key={index} onUpload={(name, passages) => addFile(index, name, passages)} onRemove={() => removeFile(index)} />
+            {files.map((file, index) => {
+                return <FileUpload file={file} key={index + file.name} onUpload={(name, passages) => addFile(index, name, passages)} onRemove={() => removeFile(index)} />
             })}
         </div>
-        <Button label={loadedCount < 2 ? 'Waiting...' : 'Ready!'} size="large" disabled={loadedCount < 2} onClick={() => {
+        <Button label={loadedCount < 2 ? 'Waiting...' : 'Compare!'} size="large" disabled={loadedCount < 2} onClick={() => {
             setExiting(true);
             const loadedFiles = files.filter(({ name, passages }) => (name !== '' && passages.length > 0))
             setContextFiles(loadedFiles);
             setTimeout(() => {
                 setMode('text');
             }, 500);
+        }} />
+        <Button label="Clear all" size="large" disabled={loadedCount < 2} type="secondary" onClick={() => {
+            setFiles([EMPTY_FILE]);
         }} />
     </div>)
 }
