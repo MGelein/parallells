@@ -1,12 +1,11 @@
-.text-row{
+.text-row {
     display: flex;
     border-radius: 0.8rem;
     position: relative;
     z-index: 1;
+    min-height: 16rem;
 
-    
-    
-    &__passage{
+    &__passage {
         background: var(--color-font-light);
         border: 2px solid var(--color-font-light);
         padding: 1rem;
@@ -22,47 +21,36 @@
         line-height: 1.5;
     }
 
-    &.compared{
-        .text-row__passage{
+    &.compared {
+        .text-row__passage {
             border-color: var(--color-accent);
         }
-        
-        box-shadow: inset 0 0 0 1.6rem var(--color-background-light), inset 0 0 0 1.8rem var(--color-accent);
-    }    
 
-    & .text{
-        &.diff{
+        box-shadow: inset 0 0 0 1.6rem var(--color-background-light), inset 0 0 0 1.8rem var(--color-accent);
+    }
+
+    & .text {
+        &.diff {
             background: var(--color-accent);
             cursor: pointer;
             transition: opacity 0.2s ease-in-out;
 
-            &:hover{
+            &:hover {
                 opacity: 0.6;
             }
         }
     }
 
-    &:hover &__comparison-button{
-        transform: translate(-0.8rem);
-        opacity: 1;
-
-        button{
-            cursor: pointer;
-            pointer-events: all;
-        }
-    }
-
-
-    &__comparison-button{
+    &__comparison-button {
         width: 0;
         display: flex;
         align-items: flex-start;
         justify-content: center;
-        transform: translateX(4rem);
+        transform: translateX(-0.8rem);
         transition: transform 0.2s ease-in-out;
         z-index: -1;
-        opacity: 0;
-        
+        opacity: 1;
+
         button {
             transform: rotate(-90deg) translateX(-50%);
             text-transform: uppercase;
@@ -72,16 +60,15 @@
             border: none;
             padding: 0.8rem 1.6rem 1.6rem 1.6rem;
             cursor: pointer;
-            pointer-events: none;
             border-radius: 0.8rem 0.8rem 0 0;
             transition: transform 0.2s ease-in-out;
             letter-spacing: 1.1;
 
-            &:hover{
+            &:hover {
                 transform: rotate(-90deg) translateX(-50%) translateY(-0.5rem);
             }
 
-            .icon{
+            .icon {
                 padding-left: 0.8rem;
                 text-transform: lowercase;
             }

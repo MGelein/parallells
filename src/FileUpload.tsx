@@ -45,10 +45,11 @@ function FileUpload({
                 setUploadDone(false);
                 setFileName('');
             }}>X</span>
-            <span className="file-upload__file-name">{fileName}</span>
+            <code className="file-upload__file-name">{fileName}</code>
         </>)}
         {!uploadDone && (<>
             <span className="file-upload__instruction">Upload file</span>
+            <span className='file-upload__extensions'><code>.txt</code> or <code>.html</code></span>
             <span className="file-upload__icon">+</span>
             <input className="file-upload__input" type='file' accept='.txt, .html' onChange={(e) => readFile(e.target)} />
         </>)}

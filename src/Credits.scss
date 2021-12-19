@@ -1,4 +1,4 @@
-.credits{
+.credits {
     position: absolute;
     inset: 0;
     display: flex;
@@ -6,27 +6,27 @@
     justify-content: center;
     overflow: hidden;
 
-    &.opening{
+    &.opening {
         animation: fadeIn 0.5s ease-in-out forwards;
 
-        .credits__popover{
+        .credits__popover {
             animation: slideIn 0.5s ease-in-out forwards;
         }
     }
 
-    &.open{
+    &.open {
         background: rgba(0, 0, 0, 0.6);
     }
 
-    &.closing{
+    &.closing {
         animation: fadeOut 0.5s ease-in-out forwards;
 
-        .credits__popover{
+        .credits__popover {
             animation: slideOut 0.5s ease-in-out forwards;
         }
     }
 
-    &__popover{
+    &__popover {
         max-width: 64rem;
         min-height: 36rem;
         background: white;
@@ -37,39 +37,40 @@
         flex-direction: column;
         justify-content: space-between;
 
-        p{
+        p {
             margin-top: 0.8rem;
         }
 
-        code{
+        code {
             display: block;
             margin-top: 0.8rem;
             background: var(--color-background-light);
             padding: 0.4rem;
         }
 
-        &__button{
+        &__button {
+            margin-top: 0.8rem;
             display: flex;
             justify-content: center;
         }
     }
 
-    @keyframes fadeIn{
+    @keyframes fadeIn {
         0% {
             background: transparent;
         }
 
-        100%{
+        100% {
             background: rgba(0, 0, 0, 0.5);
         }
     }
 
-    @keyframes fadeOut{
-        0%{
+    @keyframes fadeOut {
+        0% {
             background: rgba(0, 0, 0, 0.5);
         }
 
-        100%{
+        100% {
             background: transparent;
         }
     }

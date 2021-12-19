@@ -1,4 +1,4 @@
-.file-upload{
+.file-upload {
     background: transparent;
     font-size: 1.6rem;
     border: 2px solid var(--color-background-light);
@@ -12,21 +12,25 @@
     cursor: pointer;
     transition: all 0.2s ease-in-out;
 
-    &:hover{
+    &:hover {
         transform: translateY(-0.4rem);
     }
 
-    &__icon{
+    &__extensions {
+        margin-top: 0.8rem;
+    }
+
+    &__icon {
         font-size: 4.8rem;
         font-weight: 700;
         color: var(--color-background-light);
     }
 
-    &__input{
-       display: none; 
+    &__input {
+        display: none;
     }
 
-    &__file-remove{
+    &__file-remove {
         cursor: pointer;
         transition: opacity 0.2s ease-in-out;
         margin: 0 0.4rem;
@@ -34,18 +38,23 @@
         padding: 0 0.4rem;
         border-radius: 0.4rem;
 
-        &:hover{
+        &:hover {
             opacity: 0.6;
         }
     }
 
-    &--done{
+    &__file-name {
+        max-width: 16rem;
+        word-wrap: break-word;
+    }
+
+    &--done {
         background-color: var(--color-background-dark);
         color: var(--color-font-light);
         cursor: default;
         flex-direction: row;
 
-        &:hover{
+        &:hover {
             transform: none;
         }
     }

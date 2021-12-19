@@ -1,4 +1,4 @@
-.file-picker{
+.file-picker {
     background: var(--color-font-light);
     border-radius: 0.8rem;
     box-shadow: 0 0 0.8rem #ccc;
@@ -11,23 +11,23 @@
     align-items: center;
     animation: slideIn 0.5s ease-in-out forwards;
 
-    &__content{
+    &__content {
         display: flex;
         align-items: center;
         max-width: 100%;
         flex-wrap: wrap;
     }
 
-    
-    &.exit{
+    &.exit {
         animation: slideOut 0.5s ease-in-out forwards;
     }
-    
+
     & > * {
         margin-bottom: 1.6rem;
     }
 
-    &__instruction{
+    &__instruction {
         margin: 0;
+        font-weight: bold;
     }
 }

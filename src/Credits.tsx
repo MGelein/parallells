@@ -21,11 +21,13 @@ function Credits() {
         <div className="credits__popover">
             <div className="credits__popover__text">
                 <h1>How to cite us</h1>
-                <p>This project was supervised by Dr. Hilde de Weerdt, and coded by Mees Gelein for Leiden University.</p>
-                <p>This tool is part of the <a href="https://dh.chinese-empires.eu/markus/beta/">MARKUS</a> suite of tools, which also
-                    contains <a href="https://dh.chinese-empires.eu/zgzy">ZGZY</a> and <a href="https://dh.chinese-empires.eu/comparativus/">Comparativus</a></p>
-                <p>To cite us, please use the following bibliographic information:</p>
-                <code>[ENTER INFORMATION]</code>
+                <p>Parallels grew out of the <a href="https://dh.chinese-empires.eu/zgzy">"Reading The Essentials of Governance Digitally"</a>
+                    &nbsp;project, both projects were designed and supervised by Professor Hilde De Weerdt, and coded by Mees Gelein.
+                </p>
+                <p>To cite the software when you use it in your research or teaching, please use the following bibliographic information: </p>
+                <code>Hilde De Weerdt and Mees Gelein. Parallels. 2021, <a href="https://dh.chinese-empires.eu/parallels">https://dh.chinese-empires.eu/parallels</a></code>
+                <p>To cite the code:</p>
+                <code>Mees Gelein. Parallels. 2021, <a href="https://github.com/MGelein/parallells">https://github.com/MGelein/parallells</a></code>
             </div>
             <div className="credits__popover__button">
                 <Button label="Close" size="large" onClick={() => {
