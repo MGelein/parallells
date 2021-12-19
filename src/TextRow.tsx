@@ -1,6 +1,6 @@
 
 import { useEffect } from 'react';
-import { useContext, useCallback, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { DataContext } from './DataContext';
 import { getDifferences } from './util/compare';
 import { breakIntoAlternatingParts, partsToHTML } from './util/markup';
@@ -13,7 +13,7 @@ function TextRow({
     index: number,
 }) {
     const { columns, K } = useContext(DataContext);
-    const passages = useCallback(() => columns.map(column => column.passages[index] ?? ''), [columns, index]);
+    const passages = useMemo(() => columns.map(column => column.passages[index] ?? ''), [columns, index]);
     const [compared, setCompared] = useState(false);
     const [contents, setContents] = useState<string[] | null>(null);
 
@@ -34,7 +34,15 @@ function TextRow({
         } else {
             setContents(passageTexts);
         }
-    }, [compared, passages, K, index]);
+    }, [compared, passages, K, index, columns]);
+
+    useEffect(() => {
+        setContents(null);
+        setCompared((wasCompared) => {
+            if (wasCompared) setTimeout(() => setCompared(true), 200);
+            return false;
+        });
+    }, [columns]);
 
     return (<div id={`row-${index}`} className={`text-row ${compared ? 'compared' : ''}`}>
         <div className="text-row__comparison-button">
@@ -43,7 +51,7 @@ function TextRow({
                 <span className="icon">{compared ? 'x' : '+'}</span>
             </button>
         </div>
-        {passages().map((passage, passageIndex) => {
+        {passages.map((passage, passageIndex) => {
             const content = contents?.[passageIndex] ?? passage;
             return <div
                 key={passageIndex}
