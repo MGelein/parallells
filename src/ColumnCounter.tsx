@@ -23,6 +23,8 @@ function ColumnCounter() {
         });
     }, [setColumns, files]);
 
+    if (files.length === 2) return null;
+
     return (<div className="column-counter">
         <label>Columns:&nbsp;</label>
         <Button label="-" size="small" type="nav" onClick={decrease} disabled={columns.length <= 2} />

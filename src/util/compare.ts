@@ -28,7 +28,7 @@ function prepareTexts(texts: string[]) {
         /*eslint no-useless-escape: "off"*/
         preparedTexts.push({
             'id': id,
-            'text': texts[id].trim().replace(/[\s\.,:;!\?]/g, '')
+            'text': texts[id].trim().replace(/[\s\.、⋯《》」「』『,。，:;!"'“‘’”\?】—]/g, '')
         });
     });
     return preparedTexts
