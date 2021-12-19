@@ -1,57 +1,60 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
 
-*, ::before, ::after {
+*,
+::before,
+::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body{ 
+body {
   font-size: 1.6rem;
 }
 
-:root{
+:root {
   --color-background-dark: #373738;
   --color-background-light: #eee;
   --color-font-dark: #414142;
   --color-font-light: white;
   --color-accent: #7ea7c2;
+  --color-accent2: #f8c4b0;
 
   font-size: 10px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: var(--color-font-primary);
 }
 
-#id{
+#id {
   display: none;
 }
 
 @keyframes fallIn {
-  0%{
-      transform: translateY(-100vh);
+  0% {
+    transform: translateY(-100vh);
   }
-  
-  100%{
-      transform: translateY(0);
+
+  100% {
+    transform: translateY(0);
   }
 }
 
 @keyframes slideIn {
-  0%{
-      transform: translateX(-100vw);
+  0% {
+    transform: translateX(-100vw);
   }
-  
-  100%{
-      transform: translateX(0);
+
+  100% {
+    transform: translateX(0);
   }
 }
 
 @keyframes slideOut {
-  0%{
+  0% {
     transform: translateX(0);
   }
 
-  100%{
+  100% {
     transform: translateX(200vw);
   }
 }
